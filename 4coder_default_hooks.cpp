@@ -374,47 +374,27 @@ default_render_buffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 		Highlight_Pair pairs[ ] = {
 			string_u8_litexpr( "NULL" ), finalize_color( defcolor_keyword, 0 ),
 			
-			string_u8_litexpr( "u0"  ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "u8"  ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "u16" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "u32" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "u64" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "U8"  ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "U16" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "U32" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "U64" ), finalize_color( defcolor_keyword, 0 ),
 			
-			string_u8_litexpr( "i8"  ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "i16" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "i32" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "i64" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "I8"  ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "I16" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "I32" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "I64" ), finalize_color( defcolor_keyword, 0 ),
 			
-			string_u8_litexpr( "f32" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "f64" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "B8"  ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "B16" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "B32" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "B64" ), finalize_color( defcolor_keyword, 0 ),
 			
-			/*string_u8_litexpr( "vector" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "string" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "array"  ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "map"    ), finalize_color( defcolor_keyword, 0 ),*/
+			string_u8_litexpr( "F32" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "F64" ), finalize_color( defcolor_keyword, 0 ),
 			
-			string_u8_litexpr( "size_t"  ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "ssize_t" ), finalize_color( defcolor_keyword, 0 ),
-			
-			string_u8_litexpr( "function"      ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "internal"      ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "local_persist" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "global"        ), finalize_color( defcolor_keyword, 0 ),
-			
-			/*string_u8_litexpr( "Vec1" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec2" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec3" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec4" ), finalize_color( defcolor_keyword, 0 ),
-			
-			string_u8_litexpr( "Vec1i" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec2i" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec3i" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec4i" ), finalize_color( defcolor_keyword, 0 ),
-			
-			string_u8_litexpr( "Vec1f" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec2f" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec3f" ), finalize_color( defcolor_keyword, 0 ),
-			string_u8_litexpr( "Vec4f" ), finalize_color( defcolor_keyword, 0 ),*/
+			string_u8_litexpr( "INTERNAL"      ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "LOCAL_PERSIST" ), finalize_color( defcolor_keyword, 0 ),
+			string_u8_litexpr( "GLOBAL"        ), finalize_color( defcolor_keyword, 0 ),
 		};
 		
 		draw_keyword_highlights( app, buffer, text_layout_id, &token_array, pairs, ArrayCount( pairs ) );
@@ -487,8 +467,8 @@ default_render_buffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 	/* ---------------- */
 	
 	// NOTE(allen): Line highlight
-	//b32 highlight_line_at_cursor = def_get_config_b32(vars_save_string_lit("highlight_line_at_cursor"));
-	b32 highlight_line_at_cursor = true;
+	b32 highlight_line_at_cursor = def_get_config_b32(vars_save_string_lit("highlight_line_at_cursor"));
+	//b32 highlight_line_at_cursor = true;
 	if (highlight_line_at_cursor && is_active_view){
 		i64 line_number = get_line_number_from_pos(app, buffer, cursor_pos);
 		draw_line_highlight(app, text_layout_id, line_number, fcolor_id(defcolor_highlight_cursor_line));
