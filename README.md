@@ -6,7 +6,7 @@ My [4coder](https://4coder.net) [custom layer](https://4coder.handmade.network/f
 
 ## How to compile
 Get the source code for [4coder_fleury](https://github.com/4coder-archive/4coder_fleury/) and put the files from this repo into the source code of [4coder_fleury](https://github.com/4coder-archive/4coder_fleury/).  
-The put the resulting source folder in your ".../[4coder](https://4coder.net)/custom/" directory and execute the build.bat in the just moved source folder (Make sure to execute the build.bat in [Visual Studio](https://visualstudio.com) command prompt).  
+The put the resulting source folder in your ".../4coder/custom/" directory and execute the build.bat in the just moved source folder (Make sure to execute the build.bat in [Visual Studio](https://visualstudio.com) command prompt).  
 
 ## Feature set
 ### 4coder_fleury
@@ -19,5 +19,3 @@ The put the resulting source folder in your ".../[4coder](https://4coder.net)/cu
 - Hex color preview in theme files (copied from [hex_colors.cpp](https://gist.github.com/thevaber/58bb6a1c03ebe56309545f413e898a95))
 - grep (ripgrep) command inside of the editor
 - manpages (using wsl) inside of the editor
-
-Have fun!
