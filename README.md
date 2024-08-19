@@ -14,7 +14,7 @@ Get the source code for [4coder_fleury](https://github.com/4coder-archive/4coder
 - \*compilation\* buffer now has background color, aswell as line wrapping  
 
 ### Custom stuff
-- custom file headers in 4coder_fleury_nickel.cpp
+- custom file headers in [4coder_fleury_nickel.cpp](https://github.com/nickel-dev/4coder_nickel/blob/main/4coder_fleury_nickel.cpp#L38)
 - Hex color preview in theme files (copied from [hex_colors.cpp](https://gist.github.com/thevaber/58bb6a1c03ebe56309545f413e898a95))
 - grep (ripgrep) command inside of the editor
 - manpages (using wsl) inside of the editor
