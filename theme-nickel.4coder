@@ -1,0 +1,70 @@
+defcolor_bar                   = defcolor_back;
+defcolor_base                  = defcolor_comment;
+defcolor_pop1                  = 0xFFdddddd;
+defcolor_pop2                  = 0xFFFF0000;
+defcolor_back                  = 0xFF151515;
+defcolor_margin                = 0xFF222222;
+defcolor_margin_hover          = defcolor_back;
+defcolor_margin_active         = defcolor_back;
+defcolor_list_item             = { defcolor_back, defcolor_back};
+defcolor_list_item_hover       = { 0xff222222, defcolor_margin};
+defcolor_list_item_active      = { defcolor_pop1, defcolor_margin};
+defcolor_cursor                = { 0xFFbb2828 };
+defcolor_at_cursor             = 0xFF0C0C0C;
+defcolor_highlight_cursor_line = 0xFF1E1E1E;
+defcolor_highlight             = 0xFF303040;
+defcolor_at_highlight          = 0xFFFF44DD;
+defcolor_mark                  = 0xFF494949;
+
+defcolor_text_default          = 0xffb9b4b8;
+
+defcolor_comment               = 0xff888888;
+defcolor_comment_pop           = { defcolor_str_constant, 0xFFDD2222 };
+defcolor_keyword               = 0xfffcecc4;
+
+defcolor_str_constant          = 0xffa9ff00;
+defcolor_char_constant         = defcolor_str_constant;
+defcolor_int_constant          = defcolor_str_constant;
+defcolor_float_constant        = defcolor_str_constant;
+defcolor_bool_constant         = defcolor_str_constant;
+defcolor_include               = defcolor_str_constant;;
+
+defcolor_preproc               = 0xFFdc7575;
+defcolor_special_character     = 0xFFDD2222;
+defcolor_ghost_character       = 0xFF4E5E46;
+defcolor_highlight_junk        = 0xFF3A0000;
+defcolor_highlight_white       = 0xFF003A3A;
+defcolor_paste                 = 0xFFDDEE00;
+defcolor_undo                  = 0xFF00DDEE;
+defcolor_back_cycle            = { 0xFF101010, 0xFF0b0b0b, 0xFF080808, 0xFF040404, 0xFF020202, 0xFF000000, 0xFF100000, 0xFF200000, 0xFF300000 };
+defcolor_text_cycle            = { 0xFFAAAAAA };
+defcolor_line_numbers_back     = 0xFF101010;
+defcolor_line_numbers_text     = defcolor_comment;
+
+fleury_color_syntax_crap           = defcolor_text_default;
+fleury_color_operators             = defcolor_text_default;
+
+fleury_color_inactive_pane_overlay = 0x22000000;
+fleury_color_inactive_pane_background = defcolor_back;
+fleury_color_file_progress_bar     = 0x66303030;
+
+fleury_color_brace_highlight       = { 0xff8ffff2 };
+fleury_color_brace_line            = { defcolor_text_default };
+fleury_color_brace_annotation      = { defcolor_text_default };
+fleury_color_index_product_type    = defcolor_keyword;
+fleury_color_index_macro           = defcolor_keyword;
+fleury_color_index_sum_type        = 0xFFa7eb13;
+fleury_color_index_function        = 0xFF88c0d0;
+fleury_color_index_constant        = fleury_color_index_function;
+fleury_color_index_comment_tag     = fleury_color_index_function;
+fleury_color_index_decl            = fleury_color_index_function;
+fleury_color_cursor_macro          = fleury_color_index_function;
+fleury_color_comment_user_name     = fleury_color_index_function;
+fleury_color_cursor_power_mode     = defcolor_text_default;
+fleury_color_cursor_inactive       = 0xff444444;
+fleury_color_plot_cycle            = { 0xff03d3fc, 0xff22b80b, 0xfff0bb0c, 0xfff0500c };
+fleury_color_token_highlight       = 0x88f2f3f4;
+fleury_color_token_minor_highlight = 0x44d19045;
+fleury_color_error_annotation      = 0xFFDD2222;
+fleury_color_lego_grab             = 0xffefaf6f;
+fleury_color_lego_splat            = 0xffefaaef;
