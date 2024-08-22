@@ -1,3 +1,78 @@
+#include <string>
+
+// Source: https://github.com/clearfeld/4coder-clearfeld/blob/master/clearfeld/custom_commands/rect_operations.cpp
+CUSTOM_COMMAND_SIG(kill_rect)
+CUSTOM_DOC("Cuts the content between the mark and cursor as a rectangle.")
+{
+    Scratch_Block scratch(app);
+    View_ID view_id = get_active_view(app, Access_ReadVisible);
+    Buffer_ID buffer_id = view_get_buffer(app, view_id, Access_ReadVisible);
+	
+    i64 cursor_pos = view_get_cursor_pos(app, view_id);
+    i64 mark_pos = view_get_mark_pos(app, view_id);
+	
+    Buffer_Cursor cursor = view_compute_cursor(app, view_id, seek_pos(cursor_pos));
+    Buffer_Cursor mark = view_compute_cursor(app, view_id, seek_pos(mark_pos));
+	
+	i64 start_line, end_line;
+	i64 start_pos, end_pos;
+	
+	if (cursor.line > mark.line) {
+		start_line = mark.line;
+		end_line = cursor.line;
+	} else {
+		start_line = cursor.line;
+		end_line = mark.line;
+	}
+	
+	if (cursor.col > mark.col) {
+		start_pos = mark.col;
+		end_pos = cursor.col;
+	} else {
+		start_pos = cursor.col;
+		end_pos = mark.col;
+	}
+	
+	--end_pos;
+	
+	std::string a;
+	
+	for (i64 i = start_line; i < end_line + 1; ++i) {
+		String_Const_u8 current_line = push_buffer_line(app, scratch, buffer_id, i);
+		
+		view_set_mark(app, view_id, seek_line_col(i, start_pos));
+		view_set_cursor(app, view_id, seek_line_col(i, end_pos));
+		
+		// NOTE: start_pos - 1 to capute the char under the mark/cursor
+		for (i64 j = start_pos - 1; j < end_pos; ++j) {
+			if (current_line.size != 0) {
+				if (current_line.str[j] == '\0') {
+					a += "";
+				}
+				else {
+					a += current_line.str[j];
+				}
+			}
+		}
+		
+		a += "\n";
+	}
+	
+	History_Group hg = history_group_begin(app, buffer_id);
+	for (i64 i = start_line; i < end_line + 1; ++i) {
+		String_Const_u8 current_line = push_buffer_line(app, scratch, buffer_id, i);
+		if (current_line.size != 0) {
+			view_set_mark(app, view_id, seek_line_col(i, start_pos));
+			view_set_cursor(app, view_id, seek_line_col(i, end_pos));
+			delete_range(app);
+			delete_char(app);
+		}
+	}
+	history_group_end(hg);
+	
+	clipboard_post(app, 0, SCu8((char*)a.c_str()));
+}
+
 // NOTE(nickel): New file headers
 BUFFER_HOOK_SIG(nickel_new_file_hook)
 {
