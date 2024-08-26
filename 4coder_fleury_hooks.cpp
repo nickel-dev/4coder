@@ -265,8 +265,8 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 		case FCoderMode_Original:
 		{
 			// TODO(nickel): Customize someday
-			//F4_Cursor_RenderEmacsStyle(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness, mark_thickness, frame_info);
-			draw_original_4coder_style_cursor_mark_highlight(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness, mark_thickness);
+			F4_Cursor_RenderEmacsStyle(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness, mark_thickness, frame_info);
+			//draw_original_4coder_style_cursor_mark_highlight(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness, mark_thickness);
 		}break;
 		
 		case FCoderMode_NotepadLike:
