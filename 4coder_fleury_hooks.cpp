@@ -71,7 +71,7 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 				{def_get_config_string(scratch, vars_save_string_lit("user_name")), finalize_color(fleury_color_comment_user_name, 0)},
 			};
 			draw_comment_highlights(app, buffer, text_layout_id,
-															&token_array, pairs, ArrayCount(pairs));
+									&token_array, pairs, ArrayCount(pairs));
 		}
 	}
 	else
@@ -85,7 +85,7 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 		Scratch_Block scratch(app);
 		String_Const_u8 buffer_name = push_buffer_base_name(app, scratch, buffer);        
 		if (string_match_insensitive(string_prefix(buffer_name, 6), string_u8_litexpr("theme-")) &&
-				string_match_insensitive(string_postfix(buffer_name, 7), string_u8_litexpr(".4coder")))
+			string_match_insensitive(string_postfix(buffer_name, 7), string_u8_litexpr(".4coder")))
 		{
 			tv_colorize_hex_colors(app,  buffer, text_layout_id);
 		}
@@ -107,7 +107,7 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 		if(colors.count >= 1 && F4_ARGBIsValid(colors.vals[0]))
 		{
 			F4_Brace_RenderHighlight(app, buffer, text_layout_id, cursor_pos,
-															 colors.vals, colors.count);
+									 colors.vals, colors.count);
 		}
 	}
 	
@@ -120,7 +120,7 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 		{
 			i64 line_number = get_line_number_from_pos(app, buffer, cursor_pos);
 			draw_line_highlight(app, text_layout_id, line_number,
-													fcolor_id(defcolor_highlight_cursor_line));
+								fcolor_id(defcolor_highlight_cursor_line));
 		}
 	}
 	
@@ -134,7 +134,7 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 			Buffer_ID compilation_buffer = get_buffer_by_name(app, name, Access_Always);
 			if (use_error_highlight){
 				draw_jump_highlights(app, buffer, text_layout_id, compilation_buffer,
-														 fcolor_id(defcolor_highlight_junk));
+									 fcolor_id(defcolor_highlight_junk));
 			}
 			
 			// NOTE(allen): Search highlight
@@ -142,7 +142,7 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 				Buffer_ID jump_buffer = get_locked_jump_buffer(app);
 				if (jump_buffer != compilation_buffer){
 					draw_jump_highlights(app, buffer, text_layout_id, jump_buffer,
-															 fcolor_id(defcolor_highlight_white));
+										 fcolor_id(defcolor_highlight_white));
 				}
 			}
 		}
@@ -193,16 +193,16 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 					if (range_contains(token_range, view_get_cursor_pos(app, view_id)))
 					{
 						F4_RenderRangeHighlight(app, view_id, text_layout_id,
-																		token_range, F4_RangeHighlightKind_Underline,
-																		fcolor_resolve(fcolor_id(fleury_color_token_highlight)));
+												token_range, F4_RangeHighlightKind_Underline,
+												fcolor_resolve(fcolor_id(fleury_color_token_highlight)));
 					}
 					// NOTE(jack): If the token matches the active buffer token. highlight it with a Minor Underline
 					else if(active_cursor_token->kind == TokenBaseKind_Identifier && 
-									string_match(token_string, active_cursor_string))
+							string_match(token_string, active_cursor_string))
 					{
 						F4_RenderRangeHighlight(app, view_id, text_layout_id,
-																		token_range, F4_RangeHighlightKind_MinorUnderline,
-																		fcolor_resolve(fcolor_id(fleury_color_token_minor_highlight)));
+												token_range, F4_RangeHighlightKind_MinorUnderline,
+												fcolor_resolve(fcolor_id(fleury_color_token_minor_highlight)));
 						
 					} 
 				}
@@ -224,9 +224,9 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 		if(token && token->kind == TokenBaseKind_Identifier)
 		{
 			F4_RenderRangeHighlight(app, view_id, text_layout_id,
-															Ii64(token->pos, token->pos + token->size),
-															F4_RangeHighlightKind_Underline,
-															fcolor_resolve(fcolor_id(fleury_color_token_highlight)));
+									Ii64(token->pos, token->pos + token->size),
+									F4_RangeHighlightKind_Underline,
+									fcolor_resolve(fcolor_id(fleury_color_token_highlight)));
 		}
 	}
 	
@@ -265,13 +265,14 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 		case FCoderMode_Original:
 		{
 			// TODO(nickel): Customize someday
-			F4_Cursor_RenderEmacsStyle(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness, mark_thickness, frame_info);
+			//F4_Cursor_RenderEmacsStyle(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness, mark_thickness, frame_info);
+			draw_original_4coder_style_cursor_mark_highlight(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness, mark_thickness);
 		}break;
 		
 		case FCoderMode_NotepadLike:
 		{
 			F4_Cursor_RenderNotepadStyle(app, view_id, is_active_view, buffer, text_layout_id, cursor_roundness,
-																	 mark_thickness, frame_info);
+										 mark_thickness, frame_info);
 			break;
 		}
 	}
@@ -346,9 +347,9 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 				F4_DrawTooltipRect(app, tooltip_rect);
 				
 				draw_string(app, tooltip_face_id, string,
-										V2f32(tooltip_rect.x0 + 4,
-													tooltip_rect.y0 + 4),
-										global_tooltips[i].color);
+							V2f32(tooltip_rect.x0 + 4,
+								  tooltip_rect.y0 + 4),
+							global_tooltips[i].color);
 			}
 		}
 	}
@@ -367,7 +368,7 @@ F4_RenderBuffer(Application_Links *app, View_ID view_id, Face_ID face_id,
 	// NOTE(rjf): Render code peek.
 	{
 		if(!view_get_is_passive(app, view_id) &&
-			 !is_active_view)
+		   !is_active_view)
 		{
 			F4_CodePeek_Render(app, view_id, face_id, buffer, frame_info);
 		}
@@ -402,7 +403,7 @@ F4_DrawFileBar(Application_Links *app, View_ID view_id, Buffer_ID buffer, Face_I
 	
 	Managed_Scope scope = buffer_get_managed_scope(app, buffer);
 	Line_Ending_Kind *eol_setting = scope_attachment(app, scope, buffer_eol_setting,
-																									 Line_Ending_Kind);
+													 Line_Ending_Kind);
 	switch (*eol_setting){
 		case LineEndingKind_Binary:
 		{
@@ -503,10 +504,10 @@ F4_Render(Application_Links *app, Frame_Info frame_info, View_ID view_id)
 	{
 		ARGB_Color color = fcolor_resolve(fcolor_id(defcolor_margin));
 		if(def_get_config_b32(vars_save_string_lit("f4_margin_use_mode_color")) &&
-			 is_active_view)
+		   is_active_view)
 		{
 			color = F4_GetColor(app, ColorCtx_Cursor(power_mode.enabled ? ColorFlag_PowerMode : 0,
-																							 GlobalKeybindingMode));
+													 GlobalKeybindingMode));
 		}
 		draw_margin(app, view_rect, region, color);
 	}
@@ -1028,7 +1029,7 @@ function BUFFER_EDIT_RANGE_SIG(F4_BufferEditRange)
 	
 	if (do_full_relex){
 		*lex_task_ptr = async_task_no_dep(&global_async_system, F4_DoFullLex_ASYNC,
-																			make_data_struct(&buffer_id));
+										  make_data_struct(&buffer_id));
 	}
 	
 	// no meaning for return
